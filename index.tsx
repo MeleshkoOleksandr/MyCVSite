@@ -15,7 +15,8 @@ import {
   Briefcase,
   User,
   Heart,
-  Cpu
+  Cpu,
+  Languages
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -106,7 +107,7 @@ const translations: Record<Language, Translation> = {
       { title: 'Data Fusion', desc: 'Integration of heterogeneous data sources.' },
       { title: 'Data Visualization', desc: 'Advanced analytics, interactive real-time maps and geospatial visualization.' },
       { title: 'Database Engineering', desc: 'Design, modeling and optimization of relational databases and complex SQL queries.' },
-      { title: 'Multi-Platform Development', desc: 'Desktop (.NET/WPF), Embedded (C++), and multi-stack project experience.' },
+      { title: 'Multi-Platform Development', desc: 'Desktop (.NET/WPF), Embedded (C++) and multi-stack project experience.' },
       { title: 'UI Development', desc: 'Developed advanced desktop user interfaces for complex data presentation.' },
       { title: 'Quality & Reliability', desc: 'Code maintenance, refactoring and performance optimization.' },
       { title: 'Tools & Observability', desc: 'Proficient in Jira/Git; experienced in monitoring and rapid troubleshooting.' }
@@ -303,7 +304,7 @@ const translations: Record<Language, Translation> = {
     },
     labels: {
       skills: 'Technische Fähigkeiten',
-      languages: 'Languages',
+      languages: 'Sprachen',
       location: 'Standort',
       email: 'E-Mail',
       phone: 'Telefon',
@@ -335,7 +336,7 @@ const translations: Record<Language, Translation> = {
           'Entwicklung von Echtzeit-Datenverarbeitungssystemen für Radar (1D/2D/3D), Infrarotsensoren und Satellitendaten.',
           'Implementierung von Algorithmen zur Objektklassifizierung und -identifizierung basierend auf dynamischen und Radarmerkmalen.',
           'Design einheitlicher Radar-Lagebildsysteme für zivile und militärische Anwendungen.',
-          'Entwicklung von GPS-unabhängigen Navigationssystemen mit Inertialsensoren und Korrekturalgorithmen.',
+          'Entwicklung von GPS-unabhängigen Navigationssystemen mit Inertialsensoren und Korrekturalгоrithmen.',
           'Design maritimer Navigations- und Schiffidentifikationssysteme.',
           'Entwicklung von Embedded-Software für militärische und industrielle Geräte (C++).',
           'Implementierung von Hochleistungslösungen zur Echtzeitüberwachung von Luft- und Seeräumen.',
@@ -360,7 +361,7 @@ const translations: Record<Language, Translation> = {
         company: 'LLC Chistyj-svet (KARCHER Ukraine), Kiew, Ukraine',
         period: '07.2009 – 09.2010',
         details: [
-          'Administration von Unternehmensnetzwerken und IT-Infrastruktur.',
+          'Administration von Unternehmensnetzwerken und IT-Inфраструктур.',
           'Verwaltung von Servern, Datenbanken und E-Mail-Systemen.',
           'Konfiguration von Active Directory und Netzwerkdiensten.',
           'Entwicklung interner Support-Tools und Dienstprogramme.'
@@ -386,7 +387,7 @@ const translations: Record<Language, Translation> = {
         degree: 'Bachelor-Abschluss',
         school: 'Nationale Technische Universität der Ukraine "KPI"',
         period: '09.2003 – 06.2007',
-        specialization: 'Informatिक'
+        specialization: 'Informatik'
       },
       {
         degree: 'Schulpflicht',
@@ -597,6 +598,59 @@ const SectionDivider = () => <div className="w-full h-px bg-gray-100" />;
 
 const PLACEHOLDER_AVATAR = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop';
 
+const LanguageMenu = ({ current, onSelect }: { current: Language, onSelect: (l: Language) => void }) => {
+  const languages: Language[] = ['en', 'it', 'de', 'uk'];
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div 
+      className="fixed top-6 right-6 z-50 flex flex-col items-end"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <motion.div 
+        layout
+        className="bg-white/95 backdrop-blur-md rounded-full shadow-xl border border-gray-100 overflow-hidden flex flex-col items-center"
+        initial={false}
+        animate={{
+          height: isHovered ? 'auto' : '44px',
+          width: '44px',
+          borderRadius: isHovered ? '22px' : '22px'
+        }}
+        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+      >
+        <div className="h-11 w-11 shrink-0 flex items-center justify-center cursor-pointer">
+          <span className="text-[11px] font-black text-[#ff8c00]">{current.toUpperCase()}</span>
+        </div>
+        
+        <AnimatePresence>
+          {isHovered && (
+            <motion.div 
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="pb-2 w-full flex flex-col items-center gap-1"
+            >
+              {languages.map((l) => l !== current && (
+                <button
+                  key={l}
+                  onClick={() => {
+                    onSelect(l);
+                    setIsHovered(false);
+                  }}
+                  className="w-9 h-9 rounded-full text-[10px] font-bold text-gray-500 hover:text-[#ff8c00] hover:bg-gray-50 transition-colors flex items-center justify-center"
+                >
+                  {l.toUpperCase()}
+                </button>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+    </div>
+  );
+};
+
 const App = () => {
   const [lang, setLang] = useState<Language>('en');
   const [openSection, setOpenSection] = useState<string | null>(null);
@@ -655,20 +709,7 @@ const App = () => {
         )}
       </AnimatePresence>
 
-      {/* Language Switcher */}
-      <div className="fixed top-6 right-6 z-50 flex gap-2 bg-white/90 backdrop-blur p-1.5 rounded-full shadow-lg border border-gray-100">
-        {(['en', 'it', 'de', 'uk'] as Language[]).map((l) => (
-          <button
-            key={l}
-            onClick={() => setLang(l)}
-            className={`w-9 h-9 rounded-full text-[10px] font-bold flex items-center justify-center transition-all ${
-              lang === l ? 'bg-[#ff8c00] text-white shadow-md' : 'hover:bg-gray-100 text-gray-500'
-            }`}
-          >
-            {l.toUpperCase()}
-          </button>
-        ))}
-      </div>
+      <LanguageMenu current={lang} onSelect={setLang} />
 
       <div className="flex flex-col md:flex-row">
         {/* Sidebar */}
