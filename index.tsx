@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { 
@@ -304,7 +303,7 @@ const translations: Record<Language, Translation> = {
     },
     labels: {
       skills: 'Technische Fähigkeiten',
-      languages: 'Sprachen',
+      languages: 'Languages',
       location: 'Standort',
       email: 'E-Mail',
       phone: 'Telefon',
@@ -387,7 +386,7 @@ const translations: Record<Language, Translation> = {
         degree: 'Bachelor-Abschluss',
         school: 'Nationale Technische Universität der Ukraine "KPI"',
         period: '09.2003 – 06.2007',
-        specialization: 'Informatik'
+        specialization: 'Informatिक'
       },
       {
         degree: 'Schulpflicht',
@@ -551,7 +550,6 @@ const DotLevel = ({ level, total = 6 }: { level: number, total?: number }) => (
   </div>
 );
 
-// Fixed: children marked as optional to satisfy JSX prop inference in complex React/TS environments.
 const Accordion = ({ 
   title, 
   icon: Icon, 
@@ -684,4 +682,230 @@ const App = () => {
           {/* Avatar Area */}
           <div className="flex justify-center">
             <div 
-              className="group relative w-56 h-72 border-[
+              className="group relative w-56 h-72 border-[8px] border-[#444444] overflow-hidden shadow-xl cursor-zoom-in transition-transform duration-500 hover:scale-[1.02]"
+              onClick={() => setIsPhotoOpen(true)}
+            >
+              <img 
+                src={profilePhoto} 
+                alt="Oleksandr Meleshko" 
+                className="w-full h-full object-cover"
+                onError={handleImageError}
+              />
+              <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <Search className="text-white" size={24} />
+              </div>
+            </div>
+          </div>
+
+          {/* Sidebar Skills */}
+          <section className="space-y-4">
+            <h2 className="text-xl font-bold border-b border-white/10 pb-2 mb-4 tracking-wide">{t.labels.skills}</h2>
+            
+            <div className="space-y-4">
+              <div className="space-y-1">
+                <h3 className="text-[11px] font-black uppercase tracking-[0.1em] text-gray-400 mb-1.5">Languages & Frameworks</h3>
+                {technicalSkills.lang.map(skill => (
+                  <div key={skill.name} className="flex justify-between items-center text-sm font-medium leading-tight py-0.5">
+                    <span>{skill.name}</span>
+                    <DotLevel level={skill.level} />
+                  </div>
+                ))}
+              </div>
+
+              <div className="space-y-1">
+                <h3 className="text-[11px] font-black uppercase tracking-[0.1em] text-gray-400 mb-1.5">DevOps & Databases</h3>
+                {technicalSkills.devops.map(skill => (
+                  <div key={skill.name} className="flex justify-between items-center text-sm font-medium leading-tight py-0.5">
+                    <span>{skill.name}</span>
+                    <DotLevel level={skill.level} />
+                  </div>
+                ))}
+              </div>
+
+              <div className="space-y-1">
+                <h3 className="text-[11px] font-black uppercase tracking-[0.1em] text-gray-400 mb-1.5 leading-tight">SCADA Systems</h3>
+                {technicalSkills.scada.map(skill => (
+                  <div key={skill.name} className="flex justify-between items-center text-sm font-medium leading-tight py-0.5">
+                    <span>{skill.name}</span>
+                    <DotLevel level={skill.level} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Sidebar Languages */}
+          <section className="space-y-4">
+            <h2 className="text-xl font-bold border-b border-white/10 pb-2 mb-4 tracking-wide">{t.labels.languages}</h2>
+            <div className="space-y-2">
+              {userLanguages.map(l => (
+                <div key={l.name} className="flex justify-between items-center text-sm font-medium">
+                  <span className="flex flex-col">
+                    <span>{l.name}</span>
+                    <span className="text-[10px] text-gray-400 font-normal leading-none mt-0.5">{l.level}</span>
+                  </span>
+                  <DotLevel level={l.dots} />
+                </div>
+              ))}
+            </div>
+          </section>
+        </aside>
+
+        {/* Main Content */}
+        <main className="flex-1 p-8 md:p-16 lg:p-20 max-w-6xl">
+          {/* Header */}
+          <header className="mb-4">
+            {/* Desktop Only: Name Header */}
+            <h1 className="hidden md:block text-5xl md:text-6xl font-light text-gray-900 mb-12 tracking-tight">Oleksandr Meleshko</h1>
+
+            {/* Contact Details Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12 border-t border-b border-gray-100 py-8">
+              <div className="flex items-center gap-4 text-gray-700">
+                <Phone size={18} className="text-[#ff8c00]" />
+                <a href="tel:+41764934033" className="hover:text-[#ff8c00] transition-colors font-medium">+41 76 493 40 33</a>
+              </div>
+              <div className="flex items-center gap-4 text-gray-700">
+                <Mail size={18} className="text-[#ff8c00]" />
+                <a href="mailto:meleshko.alex@gmail.com" className="hover:text-[#ff8c00] transition-colors font-medium">meleshko.alex@gmail.com</a>
+              </div>
+              <div className="flex items-center gap-4 text-gray-700">
+                <Calendar size={18} className="text-gray-400" />
+                <span className="font-medium text-sm">13/09/1986</span>
+              </div>
+              <div className="flex items-center gap-4 text-gray-700">
+                <Flag size={18} className="text-gray-400" />
+                <span className="font-medium text-sm">{t.labels.nationality} {t.labels.nationalityVal}</span>
+              </div>
+              <div className="flex items-center gap-4 text-gray-700">
+                <FileCheck size={18} className="text-gray-400" />
+                <span className="font-medium text-sm">{t.labels.permit} S</span>
+              </div>
+              <div className="flex items-center gap-4 text-gray-700">
+                <MapPin size={18} className="text-gray-400" />
+                <div className="flex flex-col">
+                  <span className="font-medium text-sm leading-tight">Via Maestri Comacini 19</span>
+                  <span className="text-xs text-gray-400 leading-tight">6500 Bellinzona</span>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          {/* Summary Section */}
+          <section className="mb-6">
+            <div className="mt-4">
+              <h2 className="text-3xl font-extrabold text-gray-900 mb-4 tracking-tight">{t.summaryTitle}</h2>
+              <p className="text-gray-600 text-xl leading-relaxed max-w-4xl font-light">
+                {t.summary}
+              </p>
+            </div>
+            <div className="mt-6">
+              <SectionDivider />
+            </div>
+          </section>
+
+          {/* Accordion List */}
+          <div className="space-y-0.5">
+            <Accordion 
+              title={t.sections.comp} 
+              icon={Cpu}
+              isOpen={openSection === 'comp'} 
+              onClick={() => toggleSection('comp')}
+            >
+              <ul className="list-disc pl-6 space-y-2 mt-4 marker:text-[#ff8c00]">
+                {t.competencies.map((comp, idx) => (
+                  <li key={idx}>
+                    <span className="font-bold text-gray-800">{comp.title}:</span> {comp.desc}
+                  </li>
+                ))}
+              </ul>
+            </Accordion>
+
+            <Accordion 
+              title={t.sections.work} 
+              icon={Briefcase}
+              isOpen={openSection === 'work'} 
+              onClick={() => toggleSection('work')}
+            >
+              <div className="space-y-10 mt-6">
+                {t.workItems.map((item, idx) => (
+                  <div key={idx} className="relative pl-6 border-l-2 border-gray-100">
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-2">
+                      <h4 className="text-xl font-bold text-gray-800">{item.role}</h4>
+                      <span className="text-[10px] font-black bg-gray-100 text-gray-500 px-3 py-1 tracking-tighter rounded-full uppercase">{item.period}</span>
+                    </div>
+                    <p className="text-[#ff8c00] font-semibold text-sm mb-3">{item.company}</p>
+                    {item.sector && <p className="text-gray-500 text-xs italic mb-3">{item.sector}</p>}
+                    <ul className="list-disc pl-5 space-y-1.5 text-base text-gray-600">
+                      {item.details.map((detail, dIdx) => (
+                        <li key={dIdx}>{detail}</li>
+                      ))}
+                    </ul>
+                    {item.tech && (
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {item.tech.map((tItem, tIdx) => (
+                          <span key={tIdx} className="text-[10px] bg-gray-50 text-gray-400 border border-gray-100 px-2 py-0.5 rounded">{tItem}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </Accordion>
+
+            <Accordion 
+              title={t.sections.edu} 
+              icon={Award}
+              isOpen={openSection === 'edu'} 
+              onClick={() => toggleSection('edu')}
+            >
+              <div className="space-y-8 mt-6">
+                {t.eduItems.map((item, idx) => (
+                  <div key={idx} className="relative pl-6 border-l-2 border-gray-100">
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-2">
+                      <h4 className="text-xl font-bold text-gray-800">{item.degree}</h4>
+                      <span className="text-[10px] font-black bg-gray-100 text-gray-500 px-3 py-1 tracking-tighter rounded-full uppercase">{item.period}</span>
+                    </div>
+                    <p className="text-[#ff8c00] font-semibold text-sm">{item.school}</p>
+                    {item.specialization && <p className="text-gray-600 text-base mt-1 italic">{item.specialization}</p>}
+                  </div>
+                ))}
+              </div>
+            </Accordion>
+
+            <Accordion 
+              title={t.personalCharacteristicsTitle} 
+              icon={User}
+              isOpen={openSection === 'personal'} 
+              onClick={() => toggleSection('personal')}
+            >
+              <p className="text-gray-600 text-lg leading-relaxed bg-gray-50 p-6 rounded-2xl border border-gray-100 mt-4">
+                {t.personalCharacteristics}
+              </p>
+            </Accordion>
+
+            <Accordion 
+              title={t.hobbiesTitle} 
+              icon={Heart}
+              isOpen={openSection === 'hobbies'} 
+              onClick={() => toggleSection('hobbies')}
+            >
+              <div className="flex flex-wrap gap-2 mt-4">
+                {t.hobbies.map(hobby => (
+                  <span key={hobby} className="px-4 py-2 bg-white border border-gray-100 shadow-sm rounded-full text-sm font-medium text-gray-600 hover:border-[#ff8c00] hover:text-[#ff8c00] transition-colors cursor-default">
+                    {hobby}
+                  </span>
+                ))}
+              </div>
+            </Accordion>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+};
+
+const container = document.getElementById('root');
+if (container) {
+  const root = createRoot(container);
+  root.render(<App />);
+}
