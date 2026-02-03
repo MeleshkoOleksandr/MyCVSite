@@ -812,7 +812,7 @@ const App = () => {
               </div>
               <div className="flex items-center gap-4 text-gray-700">
                 <Github size={18} className="text-[#ff8c00]" />
-                <a href="https://github.com/MeleshkoOleksandr" target="_blank" rel="noopener noreferrer" className="hover:text-[#ff8c00] transition-colors font-medium">github.com/MeleshkoOleksandr</a>
+                <a href="https://github.com/MeleshkoOleksandr" target="_blank" rel="noopener noreferrer" className="hover:text-[#ff8c00] transition-colors font-medium">GitHub.com</a>
               </div>
               <div className="flex items-center gap-4 text-gray-700">
                 <Calendar size={18} className="text-gray-400" />
