@@ -16,7 +16,8 @@ import {
   User,
   Heart,
   Cpu,
-  Languages
+  Languages,
+  Github
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -799,8 +800,8 @@ const App = () => {
             {/* Desktop Only: Name Header */}
             <h1 className="hidden md:block text-5xl md:text-6xl font-light text-gray-900 mb-12 tracking-tight">Oleksandr Meleshko</h1>
 
-            {/* Contact Details Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12 border-t border-b border-gray-100 py-8">
+            {/* Contact Details Grid - Smaller vertical gap and padding */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-2 gap-x-12 border-t border-b border-gray-100 py-6">
               <div className="flex items-center gap-4 text-gray-700">
                 <Phone size={18} className="text-[#ff8c00]" />
                 <a href="tel:+41764934033" className="hover:text-[#ff8c00] transition-colors font-medium">+41 76 493 40 33</a>
@@ -808,6 +809,10 @@ const App = () => {
               <div className="flex items-center gap-4 text-gray-700">
                 <Mail size={18} className="text-[#ff8c00]" />
                 <a href="mailto:meleshko.alex@gmail.com" className="hover:text-[#ff8c00] transition-colors font-medium">meleshko.alex@gmail.com</a>
+              </div>
+              <div className="flex items-center gap-4 text-gray-700">
+                <Github size={18} className="text-[#ff8c00]" />
+                <a href="https://github.com/MeleshkoOleksandr" target="_blank" rel="noopener noreferrer" className="hover:text-[#ff8c00] transition-colors font-medium">github.com/MeleshkoOleksandr</a>
               </div>
               <div className="flex items-center gap-4 text-gray-700">
                 <Calendar size={18} className="text-gray-400" />
