@@ -1,107 +1,263 @@
 {
-  "title": "Software Engineer",
-  "summaryTitle": "Software Engineer",
-  "summary": "Senior Software Engineer with over 12 years’ experience in the development and design of complex software systems. Specialized in high-load, distributed, real-time, embedded solutions with a strong focus on large-scale data processing, algorithms, and visualization. Solid expertise in software architecture, OOP, SOLID principles, and design patterns, with hands-on experience in database design and in delivering reliable and scalable end-to-end solutions, from requirements analysis to production.",
-  "personalCharacteristicsTitle": "Personal Characteristics",
-  "personalCharacteristics": "I am an analytical and problem-solving oriented person, quick learner, and responsible professional. I work effectively in team environments, maintaining discipline, attention to detail, and excellent organizational skills. I remain reliable and stress-resistant in complex environments, always focusing on results and quality.",
-  "hobbiesTitle": "Hobbies & Interests",
-  "hobbies": ["Hiking", "Mountain Biking", "Snowboarding", "Skiing", "Photography", "Music", "Reading", "Traveling"],
-  "sections": {
-    "comp": "Professional competencies",
-    "work": "Work experience",
-    "edu": "Education"
+  "ui": {
+    "sections": {
+      "summary": "Software Engineer",
+      "comp": "Professional competencies",
+      "work": "Work experience",
+      "edu": "Education",
+      "personal": "Personal Characteristics",
+      "hobbies": "Hobbies & Interests"
+    },
+    "labels": {
+      "skills": "Technical Skills",
+      "languages": "Languages",
+      "location": "Location",
+      "email": "Email",
+      "phone": "Phone",
+      "nationality": "Nationality",
+      "birth": "Date of Birth",
+      "permit": "Permit",
+      "nationalityVal": "Ukrainian"
+    },
+    "skillCategories": {
+      "lang": "Languages & Frameworks",
+      "devops": "DevOps & Databases",
+      "scada": "SCADA Systems"
+    }
   },
-  "labels": {
-    "skills": "Technical Skills",
-    "languages": "Languages",
-    "location": "Location",
-    "email": "Email",
-    "phone": "Phone",
-    "nationality": "Nationality",
-    "birth": "Date of Birth",
-    "permit": "Permit",
-    "nationalityVal": "Ukrainian"
-  },
-  "competencies": [
-    { "title": "High-Load & Real-Time", "desc": "Management of large data volumes and real-time processing systems." },
-    { "title": "System Architecture", "desc": "Design of scalable, distributed architectures and multi-tier systems." },
-    { "title": "Software Design", "desc": "Advanced OOP, SOLID principles and Architectural Design Patterns." },
-    { "title": "Algorithmic Development", "desc": "Classification, tracking and object identification algorithms." },
-    { "title": "Data Fusion", "desc": "Integration of heterogeneous data sources." },
-    { "title": "Data Visualization", "desc": "Advanced analytics, interactive real-time maps and geospatial visualization." },
-    { "title": "Database Engineering", "desc": "Design, modeling and optimization of relational databases and complex SQL queries." },
-    { "title": "Multi-Platform Development", "desc": "Desktop (.NET/WPF), Embedded (C++) and multi-stack project experience." },
-    { "title": "UI Development", "desc": "Developed advanced desktop user interfaces for complex data presentation." },
-    { "title": "Quality & Reliability", "desc": "Code maintenance, refactoring and performance optimization." },
-    { "title": "Tools & Observability", "desc": "Proficient in Jira/Git; experienced in monitoring and rapid troubleshooting." }
-  ],
-  "workItems": [
-    {
-      "role": "Senior Software Engineer",
-      "company": "Bit-Team LLC, Kyiv, Ukraine",
-      "period": "01.2012 – 09.2024",
-      "sector": "Sectors: radar systems, navigation, and aerial/maritime object monitoring.",
-      "details": [
-        "Development of real-time data processing systems for radar (1D/2D/3D), infrared sensors and satellite data.",
-        "Implementation of object classification and identification algorithms based on dynamic and radar features.",
-        "Design of unified radar situation awareness systems for civilian and defense applications.",
-        "Development of GPS-independent navigation systems using inertial sensors and correction algorithms.",
-        "Design of maritime navigation and vessel identification systems.",
-        "Development of embedded software for military and industrial devices (C++).",
-        "Implementation of high-performance solutions for real-time monitoring of air and maritime domains.",
-        "Visualization of up to 100,000 tracked objects on interactive maps.",
-        "Tools for data analysis and visualization (charts, reports, time series).",
-        "Developing advanced UI using DevExpress libraries."
+  "content": {
+    "header": {
+      "title": "Software Engineer"
+    },
+    "summary": "Senior Software Engineer with over 12 years’ experience in the development and design of complex software systems. Specialized in high-load, distributed, real-time, embedded solutions with a strong focus on large-scale data processing, algorithms, and visualization. Solid expertise in software architecture, OOP, SOLID principles, and design patterns, with hands-on experience in database design and in delivering reliable and scalable end-to-end solutions, from requirements analysis to production.",
+    "personalCharacteristics": "I am an analytical and problem-solving oriented person, quick learner, and responsible professional. I work effectively in team environments, maintaining discipline, attention to detail, and excellent organizational skills. I remain reliable and stress-resistant in complex environments, always focusing on results and quality.",
+    "hobbies": [
+      "Hiking",
+      "Mountain Biking",
+      "Snowboarding",
+      "Skiing",
+      "Photography",
+      "Music",
+      "Reading",
+      "Traveling"
+    ],
+    "technicalSkills": {
+      "lang": [
+        {
+          "name": "C#",
+          "level": 6
+        },
+        {
+          "name": ".NET Framework",
+          "level": 6
+        },
+        {
+          "name": "WPF",
+          "level": 6
+        },
+        {
+          "name": "LINQ",
+          "level": 6
+        },
+        {
+          "name": "ADO.NET",
+          "level": 5
+        },
+        {
+          "name": "Entity Framework",
+          "level": 5
+        },
+        {
+          "name": "SQL",
+          "level": 5
+        },
+        {
+          "name": "XML",
+          "level": 5
+        },
+        {
+          "name": "Qt",
+          "level": 4
+        },
+        {
+          "name": "C/C++",
+          "level": 3
+        },
+        {
+          "name": "Python",
+          "level": 3
+        }
       ],
-      "tech": [".NET / C# (WPF, LINQ, EF)", "Qt (C++ / Linux)", "Python", "SQL Server/PostgreSQL/Oracle"]
-    },
-    {
-      "role": "Automation Engineer",
-      "company": "Scientific Production Corporation “Kiev Institute for Automated Systems”, Kyiv",
-      "period": "10.2010 – 12.2011",
-      "details": [
-        "Design and implementation of SCADA systems (Citect) for industrial control.",
-        "Data integration and development of industrial databases.",
-        "Process automation and optimization."
+      "devops": [
+        {
+          "name": "MS SQL Server",
+          "level": 4
+        },
+        {
+          "name": "PostgreSQL",
+          "level": 4
+        },
+        {
+          "name": "Oracle DB",
+          "level": 4
+        },
+        {
+          "name": "Git",
+          "level": 5
+        },
+        {
+          "name": "Docker",
+          "level": 2
+        }
+      ],
+      "scada": [
+        {
+          "name": "SCADA (Citect)",
+          "level": 4
+        }
       ]
     },
-    {
-      "role": "System Administrator",
-      "company": "LLC Chistyj-svet (KARCHER Ukraine), Kyiv, Ukraine",
-      "period": "07.2009 – 09.2010",
-      "details": [
-        "Administration of corporate networks and IT infrastructure.",
-        "Management of servers, databases, and mail systems.",
-        "Configuration of Active Directory and network services.",
-        "Development of internal support tools and utilities."
-      ]
-    },
-    {
-      "role": "Software Developer (Part-time)",
-      "company": "KSK-Atomization, Kyiv, Ukraine",
-      "period": "10.2007 – 03.2009",
-      "details": [
-        "Development of industrial control applications using SCADA systems."
-      ]
-    }
-  ],
-  "eduItems": [
-    {
-      "degree": "Master’s Degree",
-      "school": "National Technical University of Ukraine \"KPI\"",
-      "period": "09.2007 – 06.2009",
-      "specialization": "Computer-Aided Monitoring and Systems"
-    },
-    {
-      "degree": "Bachelor’s Degree",
-      "school": "National Technical University of Ukraine \"KPI\"",
-      "period": "09.2003 – 06.2007",
-      "specialization": "Computer Science"
-    },
-    {
-      "degree": "Compulsory Education",
-      "school": "Ivano-Frankivsk, Ukraine",
-      "period": "09.1993 – 06.2003"
-    }
-  ]
+    "userLanguages": [
+      {
+        "name": "Ukrainian",
+        "level": "Native",
+        "dots": 6
+      },
+      {
+        "name": "Russian",
+        "level": "Native",
+        "dots": 6
+      },
+      {
+        "name": "English",
+        "level": "Advanced (C1)",
+        "dots": 5
+      },
+      {
+        "name": "Italian",
+        "level": "Basic (A2)",
+        "dots": 2
+      }
+    ],
+    "competencies": [
+      {
+        "title": "High-Load & Real-Time",
+        "desc": "Management of large data volumes and real-time processing systems."
+      },
+      {
+        "title": "System Architecture",
+        "desc": "Design of scalable, distributed architectures and multi-tier systems."
+      },
+      {
+        "title": "Software Design",
+        "desc": "Advanced OOP, SOLID principles and Architectural Design Patterns."
+      },
+      {
+        "title": "Algorithmic Development",
+        "desc": "Classification, tracking and object identification algorithms."
+      },
+      {
+        "title": "Data Fusion",
+        "desc": "Integration of heterogeneous data sources."
+      },
+      {
+        "title": "Data Visualization",
+        "desc": "Advanced analytics, interactive real-time maps and geospatial visualization."
+      },
+      {
+        "title": "Database Engineering",
+        "desc": "Design, modeling and optimization of relational databases and complex SQL queries."
+      },
+      {
+        "title": "Multi-Platform Development",
+        "desc": "Desktop (.NET/WPF), Embedded (C++) and multi-stack project experience."
+      },
+      {
+        "title": "UI Development",
+        "desc": "Developed advanced desktop user interfaces for complex data presentation."
+      },
+      {
+        "title": "Quality & Reliability",
+        "desc": "Code maintenance, refactoring and performance optimization."
+      },
+      {
+        "title": "Tools & Observability",
+        "desc": "Proficient in Jira/Git; experienced in monitoring and rapid troubleshooting."
+      }
+    ],
+    "workItems": [
+      {
+        "role": "Senior Software Engineer",
+        "company": "Bit-Team LLC, Kyiv, Ukraine",
+        "period": "01.2012 – 09.2024",
+        "sector": "Sectors: radar systems, navigation, and aerial/maritime object monitoring.",
+        "details": [
+          "Development of real-time data processing systems for radar (1D/2D/3D), infrared sensors and satellite data.",
+          "Implementation of object classification and identification algorithms based on dynamic and radar features.",
+          "Design of unified radar situation awareness systems for civilian and defense applications.",
+          "Development of GPS-independent navigation systems using inertial sensors and correction algorithms.",
+          "Design of maritime navigation and vessel identification systems.",
+          "Development of embedded software for military and industrial devices (C++).",
+          "Implementation of high-performance solutions for real-time monitoring of air and maritime domains.",
+          "Visualization of up to 100,000 tracked objects on interactive maps.",
+          "Tools for data analysis and visualization (charts, reports, time series).",
+          "Developing advanced UI using DevExpress libraries."
+        ],
+        "tech": [
+          ".NET / C# (WPF, LINQ, EF)",
+          "Qt (C++ / Linux)",
+          "Python",
+          "SQL Server/PostgreSQL/Oracle"
+        ]
+      },
+      {
+        "role": "Automation Engineer",
+        "company": "Scientific Production Corporation “Kiev Institute for Automated Systems”, Kyiv",
+        "period": "10.2010 – 12.2011",
+        "details": [
+          "Design and implementation of SCADA systems (Citect) for industrial control.",
+          "Data integration and development of industrial databases.",
+          "Process automation and optimization."
+        ]
+      },
+      {
+        "role": "System Administrator",
+        "company": "LLC Chistyj-svet (KARCHER Ukraine), Kyiv, Ukraine",
+        "period": "07.2009 – 09.2010",
+        "details": [
+          "Administration of corporate networks and IT infrastructure.",
+          "Management of servers, databases, and mail systems.",
+          "Configuration of Active Directory and network services.",
+          "Development of internal support tools and utilities."
+        ]
+      },
+      {
+        "role": "Software Developer (Part-time)",
+        "company": "KSK-Atomization, Kyiv, Ukraine",
+        "period": "10.2007 – 03.2009",
+        "details": [
+          "Development of industrial control applications using SCADA systems."
+        ]
+      }
+    ],
+    "eduItems": [
+      {
+        "degree": "Master’s Degree",
+        "school": "National Technical University of Ukraine \"KPI\"",
+        "period": "09.2007 – 06.2009",
+        "specialization": "Computer-Aided Monitoring and Systems"
+      },
+      {
+        "degree": "Bachelor’s Degree",
+        "school": "National Technical University of Ukraine \"KPI\"",
+        "period": "09.2003 – 06.2007",
+        "specialization": "Computer Science"
+      },
+      {
+        "degree": "Compulsory Education",
+        "school": "Ivano-Frankivsk, Ukraine",
+        "period": "09.1993 – 06.2003"
+      }
+    ]
+  }
 }

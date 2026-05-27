@@ -46,68 +46,56 @@ interface LanguageSkill {
   dots: number;
 }
 
-interface Translation {
-  title: string;
-  summaryTitle: string;
-  summary: string;
-  personalCharacteristicsTitle: string;
-  personalCharacteristics: string;
-  hobbiesTitle: string;
-  hobbies: string[];
-  sections: {
-    comp: string;
-    work: string;
-    edu: string;
-  };
-  labels: {
-    skills: string;
-    languages: string;
-    location: string;
-    email: string;
-    phone: string;
-    nationality: string;
-    birth: string;
-    permit: string;
-    nationalityVal: string;
-  };
-  competencies: { title: string; desc: string }[];
-  workItems: ExperienceItem[];
-  eduItems: EducationItem[];
+interface TechnicalSkill {
+  name: string;
+  level: number;
 }
 
-
-const technicalSkills = {
-  lang: [
-    { name: 'C#', level: 6 },
-    { name: '.NET Framework', level: 6 },
-    { name: 'WPF', level: 6 },
-    { name: 'LINQ', level: 6 },
-    { name: 'ADO.NET', level: 5 },
-    { name: 'Entity Framework', level: 5 },
-    { name: 'SQL', level: 5 },
-    { name: 'XML', level: 5 },
-    { name: 'Qt', level: 4 },
-    { name: 'C/C++', level: 3 },
-    { name: 'Python', level: 3 },
-  ],
-  devops: [
-    { name: 'MS SQL Server', level: 4 },
-    { name: 'PostgreSQL', level: 4 },
-    { name: 'Oracle DB', level: 4 },
-    { name: 'Git', level: 5 },
-    { name: 'Docker', level: 2 },
-  ],
-  scada: [
-    { name: 'SCADA (Citect)', level: 4 },
-  ]
-};
-
-const userLanguages: LanguageSkill[] = [
-  { name: 'Ukrainian', level: 'Native', dots: 6 },
-  { name: 'Russian', level: 'Native', dots: 6 },
-  { name: 'English', level: 'Advanced (C1)', dots: 5 },
-  { name: 'Italian', level: 'Basic (A2)', dots: 2 },
-];
+interface Translation {
+  ui: {
+    sections: {
+      summary: string;
+      comp: string;
+      work: string;
+      edu: string;
+      personal: string;
+      hobbies: string;
+    };
+    labels: {
+      skills: string;
+      languages: string;
+      location: string;
+      email: string;
+      phone: string;
+      nationality: string;
+      birth: string;
+      permit: string;
+      nationalityVal: string;
+    };
+    skillCategories: {
+      lang: string;
+      devops: string;
+      scada: string;
+    };
+  };
+  content: {
+    header: {
+      title: string;
+    };
+    summary: string;
+    personalCharacteristics: string;
+    hobbies: string[];
+    technicalSkills: {
+      lang: TechnicalSkill[];
+      devops: TechnicalSkill[];
+      scada: TechnicalSkill[];
+    };
+    userLanguages: LanguageSkill[];
+    competencies: { title: string; desc: string }[];
+    workItems: ExperienceItem[];
+    eduItems: EducationItem[];
+  };
+}
 
 // --- Components ---
 
@@ -334,12 +322,12 @@ const App = () => {
 
           {/* Sidebar Skills */}
           <section className="space-y-4">
-            <h2 className="text-xl font-bold border-b border-white/10 pb-2 mb-4 tracking-wide">{t.labels.skills}</h2>
+            <h2 className="text-xl font-bold border-b border-white/10 pb-2 mb-4 tracking-wide">{t.ui.labels.skills}</h2>
             
             <div className="space-y-4">
               <div className="space-y-1">
-                <h3 className="text-[11px] font-black uppercase tracking-[0.1em] text-gray-400 mb-1.5">Languages & Frameworks</h3>
-                {technicalSkills.lang.map(skill => (
+                <h3 className="text-[11px] font-black uppercase tracking-[0.1em] text-gray-400 mb-1.5">{t.ui.skillCategories.lang}</h3>
+                {t.content.technicalSkills.lang.map(skill => (
                   <div key={skill.name} className="flex justify-between items-center text-sm font-medium leading-tight py-0.5">
                     <span>{skill.name}</span>
                     <DotLevel level={skill.level} />
@@ -348,8 +336,8 @@ const App = () => {
               </div>
 
               <div className="space-y-1">
-                <h3 className="text-[11px] font-black uppercase tracking-[0.1em] text-gray-400 mb-1.5">DevOps & Databases</h3>
-                {technicalSkills.devops.map(skill => (
+                <h3 className="text-[11px] font-black uppercase tracking-[0.1em] text-gray-400 mb-1.5">{t.ui.skillCategories.devops}</h3>
+                {t.content.technicalSkills.devops.map(skill => (
                   <div key={skill.name} className="flex justify-between items-center text-sm font-medium leading-tight py-0.5">
                     <span>{skill.name}</span>
                     <DotLevel level={skill.level} />
@@ -358,8 +346,8 @@ const App = () => {
               </div>
 
               <div className="space-y-1">
-                <h3 className="text-[11px] font-black uppercase tracking-[0.1em] text-gray-400 mb-1.5 leading-tight">SCADA Systems</h3>
-                {technicalSkills.scada.map(skill => (
+                <h3 className="text-[11px] font-black uppercase tracking-[0.1em] text-gray-400 mb-1.5 leading-tight">{t.ui.skillCategories.scada}</h3>
+                {t.content.technicalSkills.scada.map(skill => (
                   <div key={skill.name} className="flex justify-between items-center text-sm font-medium leading-tight py-0.5">
                     <span>{skill.name}</span>
                     <DotLevel level={skill.level} />
@@ -371,9 +359,9 @@ const App = () => {
 
           {/* Sidebar Languages */}
           <section className="space-y-4">
-            <h2 className="text-xl font-bold border-b border-white/10 pb-2 mb-4 tracking-wide">{t.labels.languages}</h2>
+            <h2 className="text-xl font-bold border-b border-white/10 pb-2 mb-4 tracking-wide">{t.ui.labels.languages}</h2>
             <div className="space-y-2">
-              {userLanguages.map(l => (
+              {t.content.userLanguages.map(l => (
                 <div key={l.name} className="flex justify-between items-center text-sm font-medium">
                   <span className="flex flex-col">
                     <span>{l.name}</span>
@@ -413,11 +401,11 @@ const App = () => {
               </div>
               <div className="flex items-center gap-4 text-gray-700">
                 <Flag size={18} className="text-gray-400" />
-                <span className="font-medium text-sm">{t.labels.nationality} {t.labels.nationalityVal}</span>
+                <span className="font-medium text-sm">{t.ui.labels.nationality} {t.ui.labels.nationalityVal}</span>
               </div>
               <div className="flex items-center gap-4 text-gray-700">
                 <FileCheck size={18} className="text-gray-400" />
-                <span className="font-medium text-sm">{t.labels.permit} S</span>
+                <span className="font-medium text-sm">{t.ui.labels.permit} S</span>
               </div>
               <div className="flex items-center gap-4 text-gray-700">
                 <MapPin size={18} className="text-gray-400" />
@@ -432,9 +420,9 @@ const App = () => {
           {/* Summary Section */}
           <section className="mb-6">
             <div className="mt-4">
-              <h2 className="text-3xl font-extrabold text-gray-900 mb-4 tracking-tight">{t.summaryTitle}</h2>
+              <h2 className="text-3xl font-extrabold text-gray-900 mb-4 tracking-tight">{t.ui.sections.summary}</h2>
               <p className="text-gray-600 text-xl leading-relaxed max-w-4xl font-light">
-                {t.summary}
+                {t.content.summary}
               </p>
             </div>
             <div className="mt-6">
@@ -445,13 +433,13 @@ const App = () => {
           {/* Accordion List */}
           <div className="space-y-0.5">
             <Accordion 
-              title={t.sections.comp} 
+              title={t.ui.sections.comp} 
               icon={Cpu}
               isOpen={openSection === 'comp'} 
               onClick={() => toggleSection('comp')}
             >
               <ul className="list-disc pl-6 space-y-2 mt-4 marker:text-[#ff8c00]">
-                {t.competencies.map((comp, idx) => (
+                {t.content.competencies.map((comp, idx) => (
                   <li key={idx}>
                     <span className="font-bold text-gray-800">{comp.title}:</span> {comp.desc}
                   </li>
@@ -460,13 +448,13 @@ const App = () => {
             </Accordion>
 
             <Accordion 
-              title={t.sections.work} 
+              title={t.ui.sections.work} 
               icon={Briefcase}
               isOpen={openSection === 'work'} 
               onClick={() => toggleSection('work')}
             >
               <div className="space-y-10 mt-6">
-                {t.workItems.map((item, idx) => (
+                {t.content.workItems.map((item, idx) => (
                   <div key={idx} className="relative pl-6 border-l-2 border-gray-100">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-2">
                       <h4 className="text-xl font-bold text-gray-800">{item.role}</h4>
@@ -492,13 +480,13 @@ const App = () => {
             </Accordion>
 
             <Accordion 
-              title={t.sections.edu} 
+              title={t.ui.sections.edu} 
               icon={Award}
               isOpen={openSection === 'edu'} 
               onClick={() => toggleSection('edu')}
             >
               <div className="space-y-8 mt-6">
-                {t.eduItems.map((item, idx) => (
+                {t.content.eduItems.map((item, idx) => (
                   <div key={idx} className="relative pl-6 border-l-2 border-gray-100">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-2">
                       <h4 className="text-xl font-bold text-gray-800">{item.degree}</h4>
@@ -512,24 +500,24 @@ const App = () => {
             </Accordion>
 
             <Accordion 
-              title={t.personalCharacteristicsTitle} 
+              title={t.ui.sections.personal} 
               icon={User}
               isOpen={openSection === 'personal'} 
               onClick={() => toggleSection('personal')}
             >
               <p className="text-gray-600 text-lg leading-relaxed bg-gray-50 p-6 rounded-2xl border border-gray-100 mt-4">
-                {t.personalCharacteristics}
+                {t.content.personalCharacteristics}
               </p>
             </Accordion>
 
             <Accordion 
-              title={t.hobbiesTitle} 
+              title={t.ui.sections.hobbies} 
               icon={Heart}
               isOpen={openSection === 'hobbies'} 
               onClick={() => toggleSection('hobbies')}
             >
               <div className="flex flex-wrap gap-2 mt-4">
-                {t.hobbies.map(hobby => (
+                {t.content.hobbies.map(hobby => (
                   <span key={hobby} className="px-4 py-2 bg-white border border-gray-100 shadow-sm rounded-full text-sm font-medium text-gray-600 hover:border-[#ff8c00] hover:text-[#ff8c00] transition-colors cursor-default">
                     {hobby}
                   </span>
