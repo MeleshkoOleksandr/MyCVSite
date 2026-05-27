@@ -1,5 +1,7 @@
 # Oleksandr Meleshko - Personal Portfolio
 
+A modern, responsive personal portfolio and CV website built with React and Vite.
+
 ## 🚀 Features
 
 * **Modern UI/UX:** Clean, professional, and accessible design.

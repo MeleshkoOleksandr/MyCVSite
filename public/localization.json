@@ -1,0 +1,6 @@
+[
+  { "id": "en", "file": "en.json" },
+  { "id": "it", "file": "it.json" },
+  { "id": "de", "file": "de.json" },
+  { "id": "uk", "file": "uk.json" }
+]
