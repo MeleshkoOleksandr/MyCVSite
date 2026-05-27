@@ -19,7 +19,6 @@ import {
   User,
   Heart,
   Cpu,
-  Languages,
   Github,
 } from 'lucide-react';
 
@@ -408,15 +407,15 @@ const App = () => {
             {/* Contact Details Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-2 gap-x-12 border-t border-b border-gray-100 py-6">
               <div className="flex items-center gap-4 text-gray-700">
-                <Phone size={18} className="text-[#ff8c00]" />
-                <a href="tel:+41764934033" className="hover:text-[#ff8c00] transition-colors font-medium">
-                  +41 76 493 40 33
+                <Mail size={18} className="text-[#ff8c00]" />
+                <a href="mailto:meleshko.alex@gmail.com" className="hover:text-[#ff8c00] transition-colors font-medium text-sm">
+                  meleshko.alex@gmail.com
                 </a>
               </div>
               <div className="flex items-center gap-4 text-gray-700">
-                <Mail size={18} className="text-[#ff8c00]" />
-                <a href="mailto:meleshko.alex@gmail.com" className="hover:text-[#ff8c00] transition-colors font-medium">
-                  meleshko.alex@gmail.com
+                <Phone size={18} className="text-[#ff8c00]" />
+                <a href="tel:+41764934033" className="hover:text-[#ff8c00] transition-colors font-medium text-sm">
+                  +41 76 493 40 33
                 </a>
               </div>
               <div className="flex items-center gap-4 text-gray-700">
@@ -425,19 +424,19 @@ const App = () => {
                   href="https://github.com/MeleshkoOleksandr"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#ff8c00] transition-colors font-medium">
+                  className="hover:text-[#ff8c00] transition-colors font-medium text-sm">
                   GitHub
                 </a>
-              </div>
-              <div className="flex items-center gap-4 text-gray-700">
-                <Calendar size={18} className="text-gray-400" />
-                <span className="font-medium text-sm">13/09/1986</span>
               </div>
               <div className="flex items-center gap-4 text-gray-700">
                 <Flag size={18} className="text-gray-400" />
                 <span className="font-medium text-sm">
                   {t.ui.labels.nationality} {t.ui.labels.nationalityVal}
                 </span>
+              </div>
+              <div className="flex items-center gap-4 text-gray-700">
+                <Calendar size={18} className="text-gray-400" />
+                <span className="font-medium text-sm">13/09/1986</span>
               </div>
               <div className="flex items-center gap-4 text-gray-700">
                 <FileCheck size={18} className="text-gray-400" />
@@ -447,7 +446,7 @@ const App = () => {
                 <MapPin size={18} className="text-gray-400" />
                 <div className="flex flex-col">
                   <span className="font-medium text-sm leading-tight">Via Maestri Comacini 19</span>
-                  <span className="text-xs text-gray-400 leading-tight">6500 Bellinzona</span>
+                  <span className="text-xs text-gray-400 leading-tight">6500 Bellinzona Switzerland</span>
                 </div>
               </div>
             </div>
