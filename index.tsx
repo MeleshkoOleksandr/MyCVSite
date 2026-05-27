@@ -1,5 +1,8 @@
+// --- Core Dependencies ---
 import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
+
+// --- Icons ---
 import {
   Mail,
   Phone,
@@ -16,11 +19,15 @@ import {
   User,
   Heart,
   Cpu,
+  Languages,
   Github,
 } from 'lucide-react';
+
+// --- Animation Library ---
 import { motion, AnimatePresence } from 'framer-motion';
 
-// --- Types & Data ---
+// --- Types & Data Interfaces ---
+// Define TypeScript interfaces to ensure strict typings for dynamic JSON content
 type Language = string;
 
 interface ExperienceItem {
@@ -50,6 +57,10 @@ interface TechnicalSkill {
   level: number;
 }
 
+/**
+ * Interface corresponding to the structure of the language JSON files (e.g., en.json).
+ * It enforces that every localization file provides the correct UI texts and content.
+ */
 interface Translation {
   ui: {
     sections: {
@@ -98,6 +109,10 @@ interface Translation {
 
 // --- Components ---
 
+/**
+ * Renders a visual "dot level" indicator for skills.
+ * Active dots are colored orange, inactive dots are hollow boxes.
+ */
 const DotLevel = ({ level, total = 6 }: { level: number; total?: number }) => (
   <div className="flex gap-1">
     {[...Array(total)].map((_, i) => (
@@ -106,6 +121,10 @@ const DotLevel = ({ level, total = 6 }: { level: number; total?: number }) => (
   </div>
 );
 
+/**
+ * Accordion component for collapsible content sections.
+ * Uses framer-motion for smooth height and opacity transitions.
+ */
 const Accordion = ({
   title,
   icon: Icon,
@@ -125,6 +144,7 @@ const Accordion = ({
         {Icon && <Icon size={22} className="text-[#ff8c00] shrink-0" />}
         <h2 className="text-2xl font-semibold text-gray-800 tracking-tight">{title}</h2>
       </div>
+      {/* Toggle chevron icon based on open state */}
       {isOpen ? <ChevronUp size={24} className="text-gray-400" /> : <ChevronDown size={24} className="text-gray-400" />}
     </button>
     <AnimatePresence initial={false}>
@@ -143,8 +163,13 @@ const Accordion = ({
   </div>
 );
 
+// Simple aesthetic divider line
 const SectionDivider = () => <div className="w-full h-px bg-gray-100" />;
 
+/**
+ * Floating Language Selection Menu.
+ * Expands on hover to show available languages parsed from the manifest.
+ */
 const LanguageMenu = ({ current, languages, onSelect }: { current: Language; languages: Language[]; onSelect: (l: Language) => void }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -196,15 +221,27 @@ const LanguageMenu = ({ current, languages, onSelect }: { current: Language; lan
   );
 };
 
+// --- Main Application Component ---
 const App = () => {
+  // State for the currently selected language ID
   const [lang, setLang] = useState<Language>('');
+
+  // Maps language IDs (e.g., "en") to their respective JSON file paths
   const [translationsMap, setTranslationsMap] = useState<Record<string, string>>({});
+
+  // The loaded translation object. If null, data is still loading.
   const [t, setT] = useState<Translation | null>(null);
+
+  // Tracks which accordion section is currently open (only one open at a time)
   const [openSection, setOpenSection] = useState<string | null>(null);
+
+  // Tracks whether the profile photo lightbox is open
   const [isPhotoOpen, setIsPhotoOpen] = useState(false);
 
+  // Primary profile photo to attempt to load
   const profilePhoto = 'MainPhoto.jpg';
 
+  // Load language manifest on component mount
   useEffect(() => {
     fetch('/localization.json')
       .then(r => r.json())
@@ -213,11 +250,13 @@ const App = () => {
         data.forEach(item => (map[item.id] = item.file));
         setTranslationsMap(map);
         if (data.length > 0) {
+          // Set the first available language as default
           setLang(data[0].id);
         }
       });
   }, []);
 
+  // Fetch the actual translation file whenever the selected language changes
   useEffect(() => {
     if (lang && translationsMap[lang]) {
       fetch('/' + translationsMap[lang])
@@ -226,24 +265,29 @@ const App = () => {
     }
   }, [lang, translationsMap]);
 
+  // Helper to toggle accordion sections
   const toggleSection = (id: string) => {
     setOpenSection(openSection === id ? null : id);
   };
 
+  // Fallback handler if the main photo fails to load
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const target = e.target as HTMLImageElement;
     if (target.src.includes('MainPhoto.jpg')) {
+      // Fallback to external imgur link if local MainPhoto.jpg does not exist
       target.src = 'https://i.imgur.com/iSSw2bc.jpeg';
     } else {
+      // Stop infinite loop if fallback also fails
       target.onerror = null;
     }
   };
 
+  // Prevent rendering until localization data is completely downloaded
   if (!t) return <div className="min-h-screen flex items-center justify-center text-gray-500">Loading...</div>;
 
   return (
     <div className="min-h-screen bg-white text-gray-900 font-sans">
-      {/* Photo Lightbox */}
+      {/* --- Photo Lightbox Overlay --- */}
       <AnimatePresence>
         {isPhotoOpen && (
           <motion.div
@@ -274,10 +318,11 @@ const App = () => {
         )}
       </AnimatePresence>
 
+      {/* --- Language Switcher --- */}
       <LanguageMenu current={lang} languages={Object.keys(translationsMap)} onSelect={setLang} />
 
       <div className="flex flex-col md:flex-row">
-        {/* Sidebar */}
+        {/* --- Sidebar Configuration --- */}
         <aside className="w-full md:w-[360px] bg-[#333333] text-white p-8 md:p-10 md:min-h-screen flex flex-col gap-8">
           {/* Mobile Only: Name Header */}
           <div className="md:hidden mb-2">
@@ -296,11 +341,12 @@ const App = () => {
             </div>
           </div>
 
-          {/* Sidebar Skills */}
+          {/* Sidebar Domain Skills Loop */}
           <section className="space-y-4">
             <h2 className="text-xl font-bold border-b border-white/10 pb-2 mb-4 tracking-wide">{t.ui.labels.skills}</h2>
 
             <div className="space-y-4">
+              {/* Category: Languages */}
               <div className="space-y-1">
                 <h3 className="text-[11px] font-black uppercase tracking-[0.1em] text-gray-400 mb-1.5">{t.ui.skillCategories.lang}</h3>
                 {t.content.technicalSkills.lang.map(skill => (
@@ -311,6 +357,7 @@ const App = () => {
                 ))}
               </div>
 
+              {/* Category: DevOps */}
               <div className="space-y-1">
                 <h3 className="text-[11px] font-black uppercase tracking-[0.1em] text-gray-400 mb-1.5">{t.ui.skillCategories.devops}</h3>
                 {t.content.technicalSkills.devops.map(skill => (
@@ -321,6 +368,7 @@ const App = () => {
                 ))}
               </div>
 
+              {/* Category: SCADA */}
               <div className="space-y-1">
                 <h3 className="text-[11px] font-black uppercase tracking-[0.1em] text-gray-400 mb-1.5 leading-tight">{t.ui.skillCategories.scada}</h3>
                 {t.content.technicalSkills.scada.map(skill => (
@@ -333,7 +381,7 @@ const App = () => {
             </div>
           </section>
 
-          {/* Sidebar Languages */}
+          {/* Sidebar Human Languages Loop */}
           <section className="space-y-4">
             <h2 className="text-xl font-bold border-b border-white/10 pb-2 mb-4 tracking-wide">{t.ui.labels.languages}</h2>
             <div className="space-y-2">
@@ -350,14 +398,14 @@ const App = () => {
           </section>
         </aside>
 
-        {/* Main Content */}
+        {/* --- Main Reading Content Context --- */}
         <main className="flex-1 p-8 md:p-16 lg:p-20 max-w-6xl">
-          {/* Header */}
+          {/* Header Block with Metadata Links */}
           <header className="mb-4">
             {/* Desktop Only: Name Header */}
             <h1 className="hidden md:block text-5xl md:text-6xl font-light text-gray-900 mb-12 tracking-tight">Oleksandr Meleshko</h1>
 
-            {/* Contact Details Grid - Smaller vertical gap and padding */}
+            {/* Contact Details Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-2 gap-x-12 border-t border-b border-gray-100 py-6">
               <div className="flex items-center gap-4 text-gray-700">
                 <Phone size={18} className="text-[#ff8c00]" />
@@ -405,7 +453,7 @@ const App = () => {
             </div>
           </header>
 
-          {/* Summary Section */}
+          {/* Personal Summary Area */}
           <section className="mb-6">
             <div className="mt-4">
               <h2 className="text-3xl font-extrabold text-gray-900 mb-4 tracking-tight">{t.ui.sections.summary}</h2>
@@ -416,8 +464,9 @@ const App = () => {
             </div>
           </section>
 
-          {/* Accordion List */}
+          {/* Renderable List of Content Sections */}
           <div className="space-y-0.5">
+            {/* Competencies Section */}
             <Accordion title={t.ui.sections.comp} icon={Cpu} isOpen={openSection === 'comp'} onClick={() => toggleSection('comp')}>
               <ul className="list-disc pl-6 space-y-2 mt-4 marker:text-[#ff8c00]">
                 {t.content.competencies.map((comp, idx) => (
@@ -428,6 +477,7 @@ const App = () => {
               </ul>
             </Accordion>
 
+            {/* Work Experience Section */}
             <Accordion title={t.ui.sections.work} icon={Briefcase} isOpen={openSection === 'work'} onClick={() => toggleSection('work')}>
               <div className="space-y-10 mt-6">
                 {t.content.workItems.map((item, idx) => (
@@ -445,6 +495,7 @@ const App = () => {
                         <li key={dIdx}>{detail}</li>
                       ))}
                     </ul>
+                    {/* Render specific tech stacks used during experience item */}
                     {item.tech && (
                       <div className="mt-4 flex flex-wrap gap-2">
                         {item.tech.map((tItem, tIdx) => (
@@ -459,6 +510,7 @@ const App = () => {
               </div>
             </Accordion>
 
+            {/* Education History Section */}
             <Accordion title={t.ui.sections.edu} icon={Award} isOpen={openSection === 'edu'} onClick={() => toggleSection('edu')}>
               <div className="space-y-8 mt-6">
                 {t.content.eduItems.map((item, idx) => (
@@ -476,12 +528,14 @@ const App = () => {
               </div>
             </Accordion>
 
+            {/* Personal Statement Section */}
             <Accordion title={t.ui.sections.personal} icon={User} isOpen={openSection === 'personal'} onClick={() => toggleSection('personal')}>
               <p className="text-gray-600 text-lg leading-relaxed bg-gray-50 p-6 rounded-2xl border border-gray-100 mt-4">
                 {t.content.personalCharacteristics}
               </p>
             </Accordion>
 
+            {/* Hobbies Listing Area */}
             <Accordion title={t.ui.sections.hobbies} icon={Heart} isOpen={openSection === 'hobbies'} onClick={() => toggleSection('hobbies')}>
               <div className="flex flex-wrap gap-2 mt-4">
                 {t.content.hobbies.map(hobby => (
@@ -500,6 +554,7 @@ const App = () => {
   );
 };
 
+// --- Initialization ---
 const container = document.getElementById('root');
 if (container) {
   const root = createRoot(container);
